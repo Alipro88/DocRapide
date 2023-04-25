@@ -1,0 +1,107 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Réservations de mes clients
+{% endblock %}
+
+{% block body %}
+<div class="page-wrapper"> <!-- ============================================================== -->
+	<!-- Title and breadcrumb -->
+	<!-- ============================================================== -->
+	<div class="page-titles">
+		<div class="d-flex align-items-center">
+			<h5 class="font-medium m-b-0">User Contact</h5>
+			<div class="custom-breadcrumb ml-auto">
+				<a href="#!" class="breadcrumb">Home</a>
+				<a href="#!" class="breadcrumb">User Contact</a>
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Container fluid scss in scafholding.scss -->
+	<!-- ============================================================== -->
+	<div class="container-fluid"> 
+		<div class="row">
+			<div class="col l12 s12">
+				<div class="card">
+					<div class="card-content">
+						<div class="table-responsive">
+							<form method="POST" action="{{path('edit_rendez-vous_multipl')}}">
+							<table id="file_export" class="table table-bordered nowrap display">
+								<thead>
+				<tr>
+					<th>Client</th>
+					<th>Date de reservation</th>
+					<th>Reserver pour le</th>
+					<th>Action</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				{% for reservation in listReservation %}
+					<tr>
+						<td>{{ reservation.firstName }}</td>
+						<td>{{ reservation.date|date('Y-m-d') }}</td>
+						<td>{{ reservation.start_from|date('Y-m-d H:i:s')}}</td>
+						<td>
+								<ul class="dashboard-listing-table-opt  fl-wrap">
+								{% if reservation.confirmed == 0 %}
+									<div style="text-align: center">
+									<li>
+											<a  href="{{ path('reservation_confirmer', {'id': reservation.id}) }}" class="waves-effect waves-light btn-small green white-text" >Confirmé
+											    <i class="fa fa fa-calendar"></i>
+											</a>	
+									</li>
+						
+									<h4> Etat : Rendez-vous Anuller</h4>
+									</div>
+								{% else %}
+								    <div style="text-align: center">
+									<li>
+											<a  href="{{ path('reservation_annuler', {'id': reservation.id}) }}" class="waves-effect waves-light btn-small red white-text">Annuler
+												<i class="fa fa fa-times"></i>
+											</a>
+									</li>
+									<h4> Etat : Rendez-vous confirmée</h4>
+									</div>
+								{% endif %}
+								</ul>
+							<div style="text-align: center"><input  type="checkbox" name="etat[]" value="{{reservation.id}}"></div>
+						</td>
+						
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		                	<div>
+								<div>Selectionner tout</div>
+								<input type="checkbox" id="select-all" style="bottom: 132px;" />
+							</div>
+							<div>
+							    <select name="confannu">
+											<option selected>Status de Rendez-vous</option>
+											<option value="confirmer">Confirmé</option>
+											<option value="annuler">Annuler</option>
+								</select>
+							</div>
+							<button class="deleteButton" type="submit">Modifier la sélection</button>
+							</form>
+	</div>
+	<div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+
+<script>
+	document.getElementById('select-all').onclick = function() {
+	var checkboxes = document.getElementsByName('etat[]');
+	for (var checkbox of checkboxes) {
+		checkbox.checked = this.checked;
+  }
+}
+</script>
+{% endblock %}

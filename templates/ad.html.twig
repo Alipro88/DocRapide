@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}
+
+{% block body %}
+
+{# récupérer les latitudes et longitudes #}
+{# {% for ad in ads %}
+
+{% if ad.lat == 33.558285 and ad.longi == -7.634663 %}
+
+<div id="lat"  style="display:none;"> {{ ad.lat}}  </div>
+<div id="longi" style="display:none;"> {{ ad.longi}} </div>
+
+{% endif %}
+ 
+{% endfor %} #}
+
+{% for ad in  ads %}
+
+<div id="lat"  style="display:none;"> {{ ad.lat}}  </div>
+
+
+{% endfor %}
+
+
+
+
+
+
+<div id="wrapper">
+    <div class="content">
+        <!-- Map -->
+        <div class="map-container column-map right-pos-map">
+            <p> The Location </p> 
+            <div id="map" style=" height: 650px; width:790px"></div>
+            						
+        </div>
+        <!-- Map end -->          
+        <!--col-list-wrap -->   
+        <div class="col-list-wrap left-list">
+           
+            <!-- list-main-wrap-->
+            <div class="list-main-wrap fl-wrap card-listing">
+                 
+                <div class="container">
+                    <!-- listing-item -->
+                    {% for ad in ads %}
+                    {# si il y'a une redendance #}
+                    {% set url = path('ads_show', {'slug': ad.slug}) %}
+                    <div class="listing-item">
+                        <article class="geodir-category-listing fl-wrap">
+                            <div class="geodir-category-img">
+                              <a href="{{path('ads_show', {'slug': ad.slug}) }}">
+                                {% if ad.filename is not null %}
+                                    <span><img src="/images/properties/{{ad.filename}}" alt=""></span>
+                                {% endif %}
+                                {% if ad.filename is null %}
+                                    {% if ad.genre == 1 %}
+                                        <span><img src="/images/Homme.jpeg" alt=""></span>
+                                    {% endif %}
+                                    {% if ad.genre == 2 %}
+                                        <span><img src="/images/Femme.jpeg" alt=""></span>
+                                    {% endif %}        
+                                {% endif %}   
+                               <!-- <img src="{{ad.coverImage}}" alt="">--> 
+                                <div class="overlay"></div>
+                            </a>
+                                <div class="list-post-counter"></div>
+                            </div>
+                            <div class="geodir-category-content fl-wrap">
+                                <a class="listing-geodir-category" href="listing.html">{{ad.category.title}}</a>
+                                {% if app.user and app.user == ad.author %}
+                                <div class="listing-avatar"><a href="{{path('edit_ad',{'slug':ad.slug})}} "><img src="images/avatar/1.jpg" alt=""></a>
+                                    <span class="avatar-tooltip">Added By  <strong>Lisa Smith</strong></span>
+                                </div>
+                                {% endif %}
+                                <h3><a href="{{ url }}">{{ ad.name|slice(0, 20) }}</a></h3>
+                                
+                                <div class="geodir-category-options fl-wrap">
+                                    
+                                    <div class="geodir-category-location"><a  href="#0" class="map-item"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ad.adresse}}</a></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                    </div>
+            </div>
+            <!-- list-main-wrap end-->
+        </div>
+        <!--col-list-wrap -->  
+        <div class="limit-box fl-wrap"></div>
+        <!--section -->  
+        
+        <!--section end -->  
+    </div>
+    <!--content end -->   
+</div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="../js/mapslast.js"></script>
+   
+    
+   
+{% endblock %}

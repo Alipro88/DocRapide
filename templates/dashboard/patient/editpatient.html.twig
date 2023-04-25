@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}
+{% form_theme form _self %}
+{% block body %}
+{% include 'dashboard/_header.html.twig' %}
+                                                 
+                                                
+                                                    <div class="custom-form">
+                                                        {{ form_start(form) }}
+                                                    <label><i class="fa fa-user-o"></i>
+                                                    {{  form_row(form.firstName) }}
+                                                    </label>
+                                                    <label><i class="fa fa-user-o"></i>
+                                                        {{  form_row(form.lastName) }}
+                                                        </label>
+                                                    <label><i class="fa fa-address-card-o"></i>
+                                                    {# {{  form_row(form.adresse) }} #}
+                                                    </label>
+                                                    <label><i class="fa fa-phone"></i>
+                                                    {{  form_row(form.telephone) }}
+                                                    </label>
+                                                    <label><i class="fa fa-envelope-o"></i>
+                                                    {{  form_row(form.email) }}
+                                                    </label>
+                                               
+                                                <button type="submit" class="btn  big-btn  color-bg flat-btn">Save Changes<i class="fa fa-angle-right"></i></button>
+
+                                                {{ form_end(form) }} 
+                                                
+                                            </div>
+                                        </div>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->	
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                   
+                    <!-- section end -->
+                </div>
+            </div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block _ad_expertises_widget %}
+
+    {{ form_widget(form) }}
+ 
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-expertise" class="btn btn-primary">Ajouter une expertise </button>
+    </div>
+
+{% endblock %}
+
+
+{% block _ad_expertises_entry_row %}
+
+    {{ form_widget(form) }}
+
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    {% include "front/mapsjsnew.html.twig" %}
+    <script>
+        
+        $('#add-expertise').click(function(){
+            const index = +$('#widgets-counter').val();
+            const tmpl = $('#ad_expertises').data('prototype').replace(/__name__/g, index);
+            
+            $('#ad_expertises').append(tmpl);
+            $('#widgets-counter').val(index + 1);
+            handleDeleteButtons();
+        });
+    
+        function handleDeleteButtons(){
+            $('button[data-action="delete"]').click(function(){
+                const target = this.dataset.target;
+                $(target).remove();
+            });
+        }
+        function updateCounter(){
+            const count = +$('#ad_expertises div.form-group').length;
+            $('#widgets-counter').val(count);
+        }
+
+        updateCounter();
+        handleDeleteButtons();
+    
+    </script>
+ 
+{% endblock  %}

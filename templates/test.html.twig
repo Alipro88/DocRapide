@@ -1,0 +1,138 @@
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    
+     {% block title %}
+       <title>Document</title>
+     {% endblock %}
+    
+
+    
+</head>
+
+
+
+<body>
+
+   
+
+     {% block body %}
+
+
+
+
+<div id="wrapper">
+    <div class="content">
+        <!-- Map -->
+        <div class="map-container column-map right-pos-map">
+            <div id="map" style=" height: 350px; width:350px"></div>
+            <ul class="mapnavigation">
+                <li><a href="#" class="prevmap-nav">Prev</a></li>
+                <li><a href="#" class="nextmap-nav">Next</a></li>
+            </ul>
+            <div class="scrollContorl mapnavbtn" title="Enable Scrolling"><span><i class="fa fa-lock"></i></span></div>   						
+        </div>
+        <!-- Map end -->          
+        <!--col-list-wrap -->   
+        <div class="col-list-wrap left-list">
+           
+            <!-- list-main-wrap-->
+            <div class="list-main-wrap fl-wrap card-listing">
+                <a class="custom-scroll-link back-to-filters btf-l" href="#lisfw"><i class="fa fa-angle-double-up"></i><span>Back to Filters</span></a> 
+                <div class="container">
+                    <!-- listing-item -->
+                    {% for ad in ads %}
+                    {# si il y'a une redendance #}
+                    {% set url = path('ads_show', {'slug': ad.slug}) %}
+                    <div class="listing-item">
+                        <article class="geodir-category-listing fl-wrap">
+                            <div class="geodir-category-img">
+                              <a href="{{path('ads_show', {'slug': ad.slug}) }}">
+                                {% if ad.filename is not null %}
+                                    <span><img src="/images/properties/{{ad.filename}}" alt=""></span>
+                                {% endif %}
+                                {% if ad.filename is null %}
+                                    {% if ad.genre == 1 %}
+                                        <span><img src="/images/Homme.jpeg" alt=""></span>
+                                    {% endif %}
+                                    {% if ad.genre == 2 %}
+                                        <span><img src="/images/Femme.jpeg" alt=""></span>
+                                    {% endif %}        
+                                {% endif %}   
+                               <!-- <img src="{{ad.coverImage}}" alt="">--> 
+                                <div class="overlay"></div>
+                            </a>
+                                <div class="list-post-counter"></div>
+                            </div>
+                            <div class="geodir-category-content fl-wrap">
+                                <a class="listing-geodir-category" href="listing.html">{{ad.category.title}}</a>
+                                {% if app.user and app.user == ad.author %}
+                                <div class="listing-avatar"><a href="{{path('edit_ad',{'slug':ad.slug})}} "><img src="images/avatar/1.jpg" alt=""></a>
+                                    <span class="avatar-tooltip">Added By  <strong>Lisa Smith</strong></span>
+                                </div>
+                                {% endif %}
+                                <h3><a href="{{ url }}">{{ ad.name|slice(0, 20) }}</a></h3>
+                                
+                                <div class="geodir-category-options fl-wrap">
+                                    
+                                    <div class="geodir-category-location"><a  href="#0" class="map-item"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ad.adresse}}</a></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                    </div>
+            </div>
+            <!-- list-main-wrap end-->
+        </div>
+        <!--col-list-wrap -->  
+        <div class="limit-box fl-wrap"></div>
+        <!--section -->  
+        
+        <!--section end -->  
+    </div>
+    <!--content end -->   
+</div>
+
+
+{% endblock %}
+
+{% include '/partials/footer.html.twig' %}
+
+
+
+     
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+ 
+</body>
+
+
+
+<script >
+     
+     var map = L.map('map').setView([51.505, -0.09], 13);
+
+     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     maxZoom: 19,
+     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+     }).addTo(map);
+
+     
+
+    
+    
+    </script>
+    
+</html>

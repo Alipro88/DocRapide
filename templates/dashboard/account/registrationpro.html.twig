@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}
+
+{% block body %}
+	<div
+		id="wrapper">
+		<!-- Content-->
+		<div
+			class="content">
+
+			<!-- slider -->
+			<section class="scroll-con-sec hero-section pad" data-scrollax-parent="true" id="sec1">
+				<div class="bg" data-bg="images/bg/2-Copie.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
+				<div class="overlay"></div>
+				<div class="hero-section-wrap fl-wrap">
+					<div class="container">
+						<div class="intro-item  col-md-6">
+							<h2 class="proh2">La nouvelle solution pour développer l'activité de votre cabinet</h2>
+							<h3 class="proh3">Recevez de nouveaux patients qualifiés grâce à votre présence sur Docrapide.ma et à l'adressage par vos confrères.</h3>
+						
+								<h3 class="prohhi"><i class="fa fa-check"> </i>
+									Améliorez la prise en charge de vos patients
+								</h3>
+								<h3 class="prohhi"><i class="fa fa-check"> </i>
+									gagnez du temps au quotidien
+								</h3>
+								<h3 class="prohhi"><i class="fa fa-check"> </i>
+									développez votre activité
+								</h3>
+						</div>
+						<div class="col-md-5">
+							<div class="tab">
+
+								<div class="custom-form">
+									{{ form_start(form) }}
+									<div class="col-md-6">
+										<label><i class="fa fa-user-o"> </i>
+											{{  form_row(form.firstname) }}
+											</label>
+										</div>
+										<div class="col-md-6">
+											<label><i class="fa fa-user-o"> </i>
+											{{  form_row(form.lastname) }}
+											</label>
+										</div>
+										<div class="col-md-12">
+											<label><i class="fa fa-envelope"> </i>
+											{{  form_row(form.email) }}
+											</label>	
+									
+										</div>
+										<div class="col-md-12">
+											{{  form_row(form.genre) }}									
+										</div>
+										<div class="col-md-6">
+											<label><i class="fa fa-phone"> </i>
+											{{  form_row(form.telephone) }}
+											</label>
+										</div>
+										<div class="col-md-6">
+											<label><i class="fa fa-briefcase"> </i>
+											{{  form_row(form.introduction) }}
+											</label>
+										</div>
+										<div class="col-md-8">
+											{{  form_row(form.category) }}
+										</div>
+									<div class="col-md-6">
+										<button type="submit"     class="log-submit-btn"  ><span>Découvrir Docrapide</span></button>
+										{{ form_end(form) }}
+										</div>
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="bubble-bg"></div>
+			</section>
+			<!--End slider -->
+
+			<!--les 3 options-->
+			<section>
+				<div class="container">
+					<div class="section-title">
+						<h2>Comment ça marche ?</h2>
+						<div class="section-subtitle">Docrapide.ma</div>
+						<span class="section-separator"></span>
+					</div>
+					<!--process-wrap  -->
+					<div class="process-wrap fl-wrap">
+						<ul>
+							<li>
+								<div class="process-item">
+									<span class="process-count">01 . </span>
+									<div class="time-line-icon"><i class="fa fa-map-o"></i></div>
+									<h4> Expérience de travail nouvelle </h4>
+									<p>Docrapide Médecin est un logiciel médical nouvelle génération en ligne qui vous permet de gagner du temps, du confort de travail et de mieux prendre en charge vos patients. C’est la solution tout en un la plus complète du marché.</p>
+								</div>
+								<span class="pr-dec"></span>
+							</li>
+							<li>
+								<div class="process-item">
+									<span class="process-count">02 .</span>
+                                <div class="time-line-icon"><i class="fa fa-envelope-open-o"></i></div>
+                                <h4>Bénéficiez d'une application haut de gamme</h4>
+                                <p>Tout est intégré dans un seul et même application: la prise de rendez vous, la gestion des patients dans un espace de travail simple et intuitif</p>
+							</div>
+								<span class="pr-dec"></span>
+							</li>
+							<li>
+								<div class="process-item">
+									<span class="process-count">03 .</span>
+									<div class="time-line-icon"><i class="fa fa-television"></i></div>
+                                <h4> Souscrire à Docrapide Médecin </h4>
+                                <p>Pour vous abonner à Docrapide Médecin, cliquez sur les boutons « Professionnel de santé » et remplissez notre formulaire. Un de nos experts prendra contact avec vous dans les plus brefs délais.</p>
+</div>
+							</li>
+						</ul>
+					
+
+					</div>
+					<!--process-wrap   end-->
+				</div>
+			</section>
+			<!--End les 3 options-->
+
+			<!--notre communauté-->
+			<section class="color-bg">
+				<div class="shapes-bg-big"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="images-collage fl-wrap">
+								<div class="images-collage-title" style="font-size: 12px;">Doc<span>rapide</span></div>
+                    <div class="images-collage-main images-collage-item"><img src="images/avatar/1.jpg" alt=""></div>
+                    <div class="images-collage-other images-collage-item" data-position-left="23" data-position-top="10" data-zindex="2"><img src="images/avatar/2.jpg" alt=""></div>
+                    <div class="images-collage-other images-collage-item" data-position-left="62" data-position-top="54" data-zindex="5"><img src="images/avatar/3.jpg" alt=""></div>
+                    <div class="images-collage-other images-collage-item anim-col" data-position-left="18" data-position-top="70" data-zindex="11"><img src="images/avatar/4.jpg" alt=""></div>
+                    <div class="images-collage-other images-collage-item" data-position-left="37" data-position-top="90" data-zindex="1"><img src="images/avatar/5.jpg" alt=""></div>
+                </div>
+						</div>
+						<div class="col-md-6">
+							<div class="color-bg-text">
+								<h3>Rejoignez notre communauté</h3>
+								<p>Vous êtes professionnel de santé ? Inscrivez-vous en un clic et rejoignez notre communauté  !</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--Notre communauté-->
+
+		{% endblock %}

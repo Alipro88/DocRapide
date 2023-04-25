@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}
+
+{% block body %}
+
+         {% include 'dashboard/_header.html.twig' %}
+                                                 
+         <div class="col-list-wrap left-list saf">
+           
+            <!-- list-main-wrap-->
+            <div class="list-main-wrap fl-wrap card-listing">
+                <a class="custom-scroll-link back-to-filters btf-l" href="#lisfw"><i class="fa fa-angle-double-up"></i><span>Back to Filters</span></a> 
+                <div class="container">
+            {% if user.ads | length > 0 %}
+                {% for ad in user.ads %}
+                {# si il y'a une redendance #}
+                {% set url = path('ads_show', {'slug': ad.slug}) %}
+                <div class="listing-item safo">
+                    <article class="geodir-category-listing fl-wrap">
+                        <div class="geodir-category-img">
+                          <a href="{{path('ads_show', {'slug': ad.slug}) }}">
+                            
+                            {% if (ad.filename) > 0 %}
+                            <img src="/images/properties/{{ad.filename}}" alt="">
+                            {% else %}
+                            <img src="/images/all/single/1.jpg" alt="">
+                            {% endif %}
+        
+                           <!-- <img src="{{ad.coverImage}}" alt="">--> 
+                          
+                            <div class="overlay"></div>
+                        </a>
+                            
+                        </div>
+                        <div class="geodir-category-content fl-wrap">
+                            <a class="listing-geodir-category" href="#">{{ad.category.title}}</a>
+                            {% if app.user and app.user == ad.author %}
+                            <div class="listing-avatar"><a href="{{path('edit_ad',{'slug':ad.slug})}} "><img src="/images/avatar/edit.png" alt=""></a>
+                                <span class="avatar-tooltip">Editer mon  <strong>Profile</strong></span>
+                            </div>
+                            {% endif %}
+                            <h3><a href="{{ url }}">{{ ad.name|slice(0, 20) }}</a></h3>
+                            
+                            <div class="geodir-category-options fl-wrap">
+                                {#<div class="listing-rating card-popup-rainingvis" data-starrating2="5">#}
+                                {#    <span>(7 reviews)</span>#}
+                                {#</div>#}
+                                <div class="geodir-category-location"><a  href="#0" class="map-item"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ad.adresse}}</a></div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+              
+                {% endfor %}
+            {% else %}
+                 <!-- dashboard-list end-->
+                                    {% for reservation in reservations %}
+                                        {% if reservation.confirmed == true  %}
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <span class="new-dashboard-item">
+												<a href="{{ path('ads_show', {'slug': reservation.ad.slug}) }}">Nouvelle réservation
+												<i class="fa fa-home"></i>
+												</a>
+											</span>
+                                                <div class="dashboard-listing-table-image">
+                                                    <a href="{{ path('ads_show', {'slug': reservation.ad.slug}) }}"><img src="{{ asset("images/all/1.jpg") }}" alt=""></a>
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                    <h4><a href="{{ path('ads_show', {'slug': reservation.ad.slug}) }}">{{ reservation.ad.name }}</a></h4>
+                                                    <span class="dashboard-listing-table-address"><i class="fa fa-calendar-times-o"></i><a>{{ reservation.startFrom|date("m/d/Y H:i") }}</a></span>
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                     <span class="dashboard-listing-table-address"><i class="fa fa-map-marker"></i><a>{{ reservation.ad.adresse }}</a></span>
+                                                </div>
+                                                 {% if reservation.confirmed is null  %}
+													<h4>
+
+														Status : <b>Activer ou Désactiver la reservation</b>
+														</h4>
+                                                    {% elseif reservation.confirmed == 0 %}
+													<h4>
+														Status : <b>Anuller</b>
+													</h4>
+                                                    {% else %}
+														<h4>
+															Status : <b>Confirmé</b>
+														</h4>
+													{% endif %}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!-- dashboard-list end-->
+            {% endif %}
+            {% if not is_granted('ROLE_PATIENT') and not is_granted('ROLE_ADMIN')%}
+              <div class="col-md-12">
+                                        <!-- profile-edit-container--> 
+                                        <div class="profile-edit-container">
+                                            <div class="profile-edit-header fl-wrap" style="margin-top:30px">
+                                                <h4>Bonjour , <span>{{ad.name}}</span></h4>
+                                            </div>
+                                                                                     
+                                                  <!-- statistic-container--> 
+                                            <div class="statistic-container">
+                                            <!-- statistic-item-wrap--> 
+                                            	<div class="statistic-item-wrap"> 
+                                            	<div class="statistic-item gradient-bg fl-wrap">
+                                                	<i class="fa fa-map-marker"></i>
+                                                    <div class="statistic-item-numder">21</div>
+                                                    <h5>Client</h5>
+                                                </div>
+                                                </div>
+                                            <!-- statistic-item-wrap end-->                                                                                        
+                                            <!-- statistic-item-wrap--> 
+                                            	<div class="statistic-item-wrap"> 
+                                            	<div class="statistic-item gradient-bg fl-wrap">
+                                                	<i class="fa fa-comments-o"></i>
+                                                    <div class="statistic-item-numder">675</div>
+                                                    <h5>Vue</h5>
+                                                </div>
+                                                </div>
+                                            <!-- statistic-item-wrap end-->
+                                            <!-- statistic-item-wrap--> 
+                                            	<div class="statistic-item-wrap"> 
+                                            	<div class="statistic-item gradient-bg fl-wrap">
+                                                	<i class="fa fa fa-eye"></i>
+                                                    <div class="statistic-item-numder">1054</div>
+                                                    <h5>Réservation</h5>
+                                                </div>
+                                                </div>
+                                            <!-- statistic-item-wrap end--> 
+                                            </div>
+         									<!-- statistic-container end--> 
+                                        </div>
+                                        <!-- profile-edit-container end-->                                         
+                                                                              
+                                    </div>
+            {% endif %}
+            </div>
+            </div>
+                                               
+                                        </div>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->	
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                   
+                    <!-- section end -->
+                </div>
+            </div>
+
+{% endblock %}

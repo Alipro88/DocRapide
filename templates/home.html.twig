@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+{% block title %}Prendre un rendez-vous de votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}
+{% block body  %}
+<div id="wrapper">
+    <!-- Content-->
+    <div class="content">
+        <!-- Flash -->
+			{# {% for label, messages in app.flashes %}
+				<div class="container" style="width: auto;">
+					<div class="alert alert-{{ label }}">
+						{% for message in messages %}
+							<p>
+								{{message | raw}}
+							</p>
+						{% endfor %}
+					</div>
+				</div>
+			{% endfor %} #}
+			<!-- end flash -->
+        <!--section -->
+        <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
+            <div class="bg"  data-bg="images/bg/2-Copie.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
+            <div class="overlay" style="background: none; !important"></div>
+            <div class="hero-section-wrap fl-wrap">
+                <div class="container">
+                    <div class="intro-item fl-wrap">
+                        <h2 class="fs-30">Prendre un rendez-vous en Ligne pour une consultation physique chez un professionnel de santé</h2>
+                        <h3>Gagnez du temps en prenant rendez-vous en ligne directement avec le médecin de votre choix!
+                        </h3>
+                    </div>
+                    <div class="main-search-input-wrap">
+                            {{ form_start(form) }}
+                        <div class="main-search-input fl-wrap">
+                            <div class="main-search-input-item">
+                                    {{ form_row(form.qt) }}
+                               <!-- <input type="text" placeholder="What are you looking for?" value=""/> --> 
+                            </div>
+                            <div class="main-search-input-item">
+                                    {{ form_row(form.ville) }}
+                                
+                            </div>
+                            <div class="main-search-input-item">
+                                    {{ form_row(form.category) }}
+                            </div>
+                            <div class="main-search-input-item">
+                                    {{ form_row(form.urgence) }}
+                            </div>
+                            <button class="main-search-button" onclick="window.location.href='listings-half-screen-map-list.html'">Search</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="bubble-bg"> </div>
+            <div class="header-sec-link">
+                <div class="container"><a href="{{path('home')}}" class="custom-scroll-link">DocRapide</a></div>
+            </div>
+        </section>
+     
+        <!-- section end -->
+        <!--section -->
+        <section id="sec2">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Docrapide à votre service </h2>
+                    <div class="section-subtitle">Medecin au maroc</div>
+                    <span class="section-separator"></span>
+                    <p>Docrapide est une application web de réservation Médecin au Maroc dans l'optique</br> de faciliter l'experience utilisateur et de  simplifier la vie du patient.Docrapide garantit à ses patient  une prestation de qualité adéquate à  leurs besoins médicaux.
+                    </p>
+                </div>
+                <div class="features-box-container fl-wrap row">
+                    <!--features-box --> 
+                    <div class="features-box col-md-4">
+                        <div class="time-line-icon">
+                            <i class="fa fa-medkit"></i>
+                        </div>
+                        <h3>Disponnible 24h/24</h3>
+                        <p>Plus d'une dizaine de spécialités disponibles et à votre service tous les jours de la semaine y compris les jours fériés.
+                        </p>
+                    </div>
+                    <!-- features-box end  --> 
+                    <!--features-box --> 
+                    <div class="features-box col-md-4">
+                        <div class="time-line-icon">
+                            <i class="fa fa-television"></i>
+                        </div>
+                        <h3>Accessible pour tous</h3>
+                        <p>Vous pouvez également utiliser votre compte pour toute personne dont vous êtes le tuteur légal, à savoir, votre conjoint, vos enfants ,vos parents.                        </p>
+                    </div>
+                    <!-- features-box end  --> 
+                    <!--features-box --> 
+                    <div class="features-box col-md-4">
+                        <div class="time-line-icon">
+                            <i class="fa fa-cogs"></i>
+                        </div>
+                        <h3>100% sécurisé</h3>
+                        <p>Votre espace personnel est sécurisé garantissant ainsi le secret médical.
+                        </p>
+                    </div>
+                    <!-- features-box end  -->                        
+                </div>
+            </div>
+        </section>
+        <section class="parallax-section" data-scrollax-parent="true">
+            <div class="bg"  data-bg="images/bg/8.PNG" data-scrollax="properties: { translateY: '100px' }"></div>
+            <div class="overlay co lor-overlay"></div>
+            <!--container-->
+            <div class="container">
+                <div class="intro-item fl-wrap">
+                    <h2>Vous êtes professionnel de santé ?</h2>
+                    <h3>Équipez-vous du logiciel Docrapide pour gagner en confort de travail.</h3>
+                    <a class="trs-btn" href="#">Découvrir Docrapide Pro</a>
+                </div>
+            </div>
+        </section>
+        <!-- section end -->
+           <!-- section end -->
+        <!--section -->
+       
+        <!-- section end -->
+    </div>
+    <!-- Content end -->
+</div>
+{% endblock  %}

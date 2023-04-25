@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+   
+    {{  form_row(form.title) }}
+    <div class="col m6 mg20">
+    {{  form_row(form.timestart) }}
+</div>
+<div class="col m6 mg20">
+    {{  form_row(form.timeend) }}
+</div>
+<div class="col m6 mg20">
+    {{  form_row(form.datestart) }}
+</div>
+<div class="col m6 mg20">
+    {{  form_row(form.dateend) }}
+</div>
+<div class="col m6 mg20">
+    {{  form_row(form.decalage_horaire) }}
+</div>
+
+{# <div class="col m6 mg20">
+    {{  form_row(form.prix) }}
+</div>
+
+<div class="col m6 mg20">
+    {{  form_row(form.online) }}
+</div> #}
+
+<div class="col m6 mg20">
+    <label for="hue-demo">couleur du picto</label>
+    {{  form_row(form.border_color) }}
+</div>
+
+    
+{# <div class="col m7">
+    <label for="hue-demo"></label>
+    {{  form_row(form.ad) }}
+    </div> #}
+    <div class="col m12">
+    <button class="btn vio col m3">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

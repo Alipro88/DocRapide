@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisez votre mot de passe{% endblock %}
+
+{% block body %}
+	<div
+		id="wrapper">
+		<!--content -->
+		<div
+			class="content">
+			<!--section -->
+			<section
+				id="sec1">
+				<!-- container -->
+				<div
+					class="container">
+					<!-- profile-edit-wrap -->
+					<div class="profile-edit-wrap">
+    <h1>Réinitialisez votre mot de passe</h1>
+
+<div class="profile-edit-container">
+    {{ form_start(resetForm) }}
+    <div class="custom-form no-icons">
+    <div class="pass-input-wrap fl-wrap">
+        {{ form_row(resetForm.plainPassword) }}
+        	<span class="eye">
+			<i class="fa fa-eye" aria-hidden="true"></i>
+		    </span>
+    </div>
+        <button class="btn  big-btn  color-bg flat-btn">Reset password</button>
+        </div>
+    {{ form_end(resetForm) }}
+    </div>
+    
+    </div>
+    </div>
+    </section>
+    </div>
+    </div>
+{% endblock %}

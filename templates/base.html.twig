@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <!--=============== basic  ===============-->
+            <meta charset="UTF-8">
+            <title>
+    			{% block title %}Prendre un Rendez-vous En Ligne - DocRapide
+    			{% endblock %}
+	    	</title>
+            <meta property="og:locale" content="fr_FR" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://docrapide.ma/" />
+            <meta property="og:site_name" content="docrapide" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <meta name="robots" content="index, follow"/>
+            <meta name="subject" content="rendez-vous Médecin">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    	<title>Prendre un Rendez-vous En Ligne - DocRapide</title>
+            <meta name="keywords" content="Médecin,docteur,dabadoc,doctolib,rendez-vous,clinique,Prendre un Rendez-vous En Ligne - DocRapide,Hopital,médecin specialiste,médecin généraliste, Médecin casablanca,docteur casablanca"/>
+            <meta name="description" content="Docrapide est une application web qui permet de prendre rendez-vous avec votre médecin en ligne au Maroc dans l'optique
+                    de faciliter l'experience utilisateur et de  simplifier la vie du patient.Docrapide garantit à ses patient  une prestation de qualité adéquate à  leurs besoins médicaux."/>
+            
+            <link rel="canonical" href="https://docrapide.ma/" />
+            <!--=============== css  ===============-->
+            <link type="text/css" rel="stylesheet" href="/css/reset.css">
+            <link type="text/css" rel="stylesheet" href="/css/plugins.css">
+            <link type="text/css" rel="stylesheet" href="/css/style.css">
+            <link type="text/css" rel="stylesheet" href="/css/color.css">
+            {% block stylesheets %}{% endblock %}
+            {% block description %}{% endblock %}
+            <!--=============== favicons ===============-->
+            <link rel="shortcut icon" href="/images/favicon.ico" alt="favicon">
+            
+            
+                        <!-- Google tag (gtag.js) -->
+            {# <script async src="https://www.googletagmanager.com/gtag/js?id=G-6F50NNXVFE"></script> #}
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'G-6F50NNXVFE');
+            </script>
+
+             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+              integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+              crossorigin=""/>
+
+               <!-- Make sure you put this AFTER Leaflet's CSS -->
+              <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+              integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+              crossorigin=""></script>
+            </head>
+    <body>
+
+       
+    
+      {% include '/partials/header.html.twig' %}
+      
+     
+        {% block body %}{% endblock %}
+
+      {% include '/partials/footer.html.twig' %}
+
+      
+      <script type="text/javascript" src="/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/js/plugins.js"></script>
+      <script type="text/javascript" src="/js/scripts.js"></script>
+      {# <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCayDwFDQ5E7CZSRlKI6468fDO56mXWy8"></script> #}
+      {# <script type="text/javascript" src="/js/map_infobox.js"></script> #}
+      <script type="text/javascript" src="/js/markerclusterer.js"></script>  
+      {# <script type="text/javascript" src="/js/maps.js"></script> #}
+      <script type="text/javascript" src="/js/mapslast.js"></script>
+      {% block javascripts %}{% endblock %}
+    </body>
+</html>

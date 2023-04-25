@@ -1,0 +1,80 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<div class="page-wrapper"> <!-- ============================================================== -->
+	<!-- Title and breadcrumb -->
+	<!-- ============================================================== -->
+	<div class="page-titles">
+		<div class="d-flex align-items-center">
+			<h5 class="font-medium m-b-0">Docsuppression</h5>
+			
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Container fluid scss in scafholding.scss -->
+	<!-- ============================================================== -->
+	<div class="container-fluid"> 
+		<div class="row">
+			<div class="col l12 s12">
+				<div class="card">
+					<div class="card-content">
+						<div class="table-responsive">
+							<form method="POST" action="{{path('calendar_delete_multipl')}}">
+							<table id="file_export" class="table table-bordered nowrap display">
+								<thead>
+										<tr>
+											<th>N°</th>
+											<th>Title</th>
+											<th>l'heure</th>
+											<th>date</th>
+											<th>Actions</th>
+										</tr>
+										
+								</thead>
+								
+									<tbody>
+										<!-- 1 -->
+										
+											<!-- 2 -->
+											{% for calendar in calendars %}
+												<tr>
+													<td>{{ calendar.id }}</td>
+													<td>{{ calendar.title }}</td>
+													<td>{{ calendar.timestart ? calendar.timestart|date('H:i') : '' }}</td>
+													<td>{{ calendar.datestart ? calendar.datestart|date('Y-m-d') : '' }}</td>
+													
+													<!-- 3 -->
+													<td><input type="checkbox" name="deletePm[]" value="{{calendar.id}}"></td>
+												</tr>
+											{% endfor %}
+											
+											<!-- end new -->
+									</tbody>
+							</table>
+							<div>
+								<div>Selectionner tout</div>
+								<input type="checkbox" id="select-all">
+							</div>
+							<button class="deleteButton" type="submit">supprimer la selection</button>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+
+<script>
+	document.getElementById('select-all').onclick = function() {
+	var checkboxes = document.getElementsByName('deletePm[]');
+	for (var checkbox of checkboxes) {
+		checkbox.checked = this.checked;
+  }
+}
+</script>
+{% endblock %}

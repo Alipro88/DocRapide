@@ -1,0 +1,91 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+        <div class="page-wrapper">
+            <div class="page-titles">
+                <div class="d-flex align-items-center">
+                    <h5 class="font-medium m-b-0">User Contact</h5>
+                    <div class="custom-breadcrumb ml-auto">
+                        <a href="#!" class="breadcrumb">Home</a>
+                        <a href="#!" class="breadcrumb">User Contact</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Container fluid scss in scafholding.scss -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col l12 s12">
+                        <div class="card">
+                            <div class="card-content">
+								 <div id='calendrier'></div> 
+							</div></div></div></div></div></div>
+
+{% endblock %}
+{% block javascripts %}
+
+	 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->>
+
+	<script>
+		window.onload = () => {
+let calendarElt = document.querySelector("#calendrier")
+let calendar = new FullCalendar.Calendar(calendarElt, {
+initialView: 'dayGridMonth',
+locale: 'fr',
+timeZone: 'Europe/Paris',
+headerToolbar: {
+start: 'prev,next today',
+center: 'title',
+end: 'dayGridMonth,timeGridWeek'
+},
+events: {{ data|raw }},
+editable: true,
+eventResizableFromStart: true
+})
+
+calendar.on('eventChange', (e) => {
+let url = `/admin/api/${
+e.event.id
+}/edit`
+let donnees = {
+"title": e.event.title,
+"description": e.event.extendedProps.description,
+"start": e.event.start,
+"end": e.event.end,
+"borderColor": e.event.borderColor,
+"allDay": e.event.allDay
+}
+// console.log(donnees);
+let xhrr = new XMLHttpRequest
+xhrr.open("PUT", url)
+xhrr.send(JSON.stringify(donnees))
+})
+
+calendar.on('eventClick', (e) => {
+let url = `/admin/calendar/deleteevent/${
+e.event.id
+}`;
+
+var result = confirm("Voulez vous vraiment supprimer cette heure ?");
+if (result == true) {
+let xhr = new XMLHttpRequest
+xhr.open("DELETE", url)
+xhr.send();
+var event = calendar.getEventById(e.event.id);
+event.remove();
+} else {
+xhr.abort();
+}
+
+
+})
+
+calendar.render()
+}
+	</script>
+
+{% endblock %}

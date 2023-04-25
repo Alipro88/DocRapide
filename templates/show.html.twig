@@ -1,0 +1,492 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ad.name }} - docrapide.ma{% endblock %}
+
+{% block description %}{{ ad.description }} - docrapide.ma{% endblock %}
+
+{% block stylesheet %}
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
+ <meta name="title" content={{ ad.name }} />
+ <meta name="description" content={{ ad.description }} />
+
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div
+		id="wrapper" style="padding-top: 48px; !important">
+		<!--  content-->
+		<div
+			class="content">
+			<!-- Flash -->
+			{% for label, messages in app.flashes %}
+				<div class="container">
+					<div class="alert alert-{{ label }}" style="margin-top: 20px; border-radius: 20px;">
+						{% for message in messages %}
+							<p>
+								{{message | raw}}
+							</p>
+						{% endfor %}
+					</div>
+				</div>
+			{% endfor %}
+			<!-- end flash -->
+			<!--  carousel-->
+			<!--  carousel  end-->
+				<div class="scroll-nav-wrapper fl-wrap"> <div class="container">
+					<nav class="scroll-nav scroll-init">
+						<ul>
+							<li><a class="act-scrlink" href="#sec1">Détails</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!--  section   -->
+			<section class="gray-section no-top-padding">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+							<!-- list-single-main-wrapper -->
+							<div class="list-single-main-wrapper fl-wrap" id="sec2">
+								<div class="breadcrumbs gradient-bg  fl-wrap">
+									<a href="{{path('home')}}">Accueil</a>
+									<a>{{ad.category.title}}</a>
+									<span>{{ad.name}}</span>
+								</div>
+								<!-- list-single-header -->
+								<div class="list-single-header list-single-header-inside fl-wrap">
+									<div class="container">
+										<div class="list-single-header-item">
+											<div class="row">
+												<div class="col-md-8">
+													<div class="list-single-header-item-opt fl-wrap">
+														<div class="list-single-header-cat fl-wrap">
+															<a href="#">{{ad.category.title}}</a>
+														</div>
+													</div>
+													<h2>{{ad.name}}</h2>
+													<span class="section-separator"></span>
+												</div>
+												<div class="col-md-4">
+													<div class="fl-wrap list-single-header-column">
+														{% if ad.filename is not null %}
+															<span><img src="/images/properties/{{ad.filename}}" alt="" class="img-thumbnail"></span>
+														{% endif %}
+														{% if ad.filename is null %}
+															{% if ad.genre == 1 %}
+																<span><img src="/images/Homme.jpeg" alt="" class="img-thumbnail"></span>
+															{% endif %}
+															{% if ad.genre == 2 %}
+																<span><img src="/images/Femme.jpeg" alt="" class="img-thumbnail"></span>
+															{% endif %}        
+														{% endif %}   
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="fw-separator"></span>
+								<!-- list-single-header end -->
+								<div class="list-single-main-item fl-wrap">
+									<div class="container">
+										<div class="list-single-main-item-title fl-wrap">
+											<h3> {{ad.name}} </h3>
+										</div>
+										<div class="listing-features fl-wrap">
+												<ul>
+													<li><i class="fa fa-rocket"></i>Obtenez un rendez-vous plus rapidement</li>
+													
+													<li><i class="fa fa-home"></i> Consultez votre praticien de chez vous</li>
+												</ul>	
+										</div>
+									</div>
+								</div>
+								<div class="list-single-main-item fl-wrap">
+									<div class="list-single-main-item-title fl-wrap">
+										<h3>Présentation du professionnel de santé
+										</h3>
+									
+									</div>
+									<div class="font_ed">{{ad.description}}</div>
+									<span class="fw-separator"></span>
+									<div class="list-single-main-item-title fl-wrap">
+										<h3>Moyens de paiement</h3>
+									</div>
+										<p class="font_ed"><i class="fa fa-money" style="color: #4DB7FE;"></i>&nbsp;&nbsp;{{ad.paiement}}</p>
+										<span class="fw-separator"></span>
+									<div class="list-single-main-item-title fl-wrap">
+										<h3>Langues parlées</h3>
+									</div>
+										<p class="font_ed"><i class="fa fa-language" style="color: #4DB7FE;"></i>&nbsp;&nbsp;{{ad.langue}}</p>
+										<span class="fw-separator"></span>
+										<div class="list-single-main-item-title fl-wrap">
+											<h3>Expertises, actes et symptômes</h3>
+										</div>
+										<div class="list-single-tags tags-stylwrap">
+											{% for expertise in ad.expertises %}
+												<a href="#">{{ expertise.name }}</a>
+											{% endfor %}
+										</div>
+										<span class="fw-separator"></span>
+										 <div class="list-single-main-item-title fl-wrap">
+											<h3>Diplômes</h3>
+										</div>
+										{# <div class="list-single-tags tags-stylwrap">
+											{% for diplome in ad.diplomes %}
+												<p>{{ diplome.description }}</p>
+											{% endfor %}
+										</div>  #}
+										<div class="accordion">
+										
+                                            <div class="accordion-inner visible">
+											{% for diplome in ad.diplomes %}
+												<p>{{ diplome.description }}</p>
+											{% endfor %}
+                                            </div>
+										</div>
+										<span class="fw-separator"></span>
+										<div class="list-single-main-item-title fl-wrap">
+											<h3>Consultation à domicile ?</h3>
+										</div>
+										<div class="list-single-tags tags-stylwrap">
+											{% if ad.urgence == true %}
+                            				<a style="margin-left: 15em;background: #43b7e6;color:white;
+                                            width: 35%;font-weight: 700;font-size: 15px;" href="tel:{{ad.ville.phone}}">{{ad.ville.phone}}</a>
+                            				{% endif %}
+										</div>
+								</div>
+								<!-- list-single-main-item-->
+
+								<!-- list-single-main-item end -->
+								
+								<!-- list-single-main-item -->
+								
+								<!-- list-single-main-item end -->
+								<!-- list-single-main-item -->
+								
+								<!-- list-single-main-item end -->
+							</div>
+						</div>
+						<!--box-widget-wrap -->
+						<div class="col-md-4">
+							<div class="box-widget-wrap">
+								<!--box-widget-item -->
+
+								<!--box-widget-item end -->
+								<!-- Serch reservation  -->
+
+								<input type="hidden" value={{ad.id}} id="adId"/> <div class="box-widget-item">
+									<div class="box-widget-item-header">
+										<h3>Choisir un rendez-vous :
+										</h3>
+									</div>
+									<div class="box-widget">
+
+										<div class="box-widget-content" style="padding: 25px 30px 15px;">
+											<div class="row">
+
+												<div>
+													<input class="search-reservation btn big-btn color-bg flat-btn hidden" type="submit" onclick="checkTime()" value="Search" id="btnSearch">
+												</div>
+											</div>
+
+											{# <form {% if app.user == null %} action="{{ path('account_register_from_reservation', {slug: ad.slug} ) }}" {% endif %} action="{{ path('safoine-reservation', {slug: ad.slug} ) }}" class="add-comment custom-form"> #}
+
+
+												<div class="row">
+
+
+													<div class="col-md-6">
+														<input name="date" id="date-input" onChange="checkTime()" type="date" placeholder="Date" style="width: auto;">
+													</div>
+													<div slass="row">
+														<div class="col-md-12">
+														{# <div id="data-online" class="hide"></div> #}
+														<div id="data-ajax2"></div>
+															<div id="feedback"></div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<input name="debut" type="hidden" placeholder="Debut" id="demo"></input>
+												</div>
+											</div>
+	                                        {# <input name="prix" type="hidden" type="text" placeholder="prix" id="prix"></input>
+											online:  <input type="checkbox" class="online" id="chk" name="online" value="online" />
+											Cabiner:  <input type="checkbox" class="cab" id="chkcab" name="cab" value="0" /> #}
+											<button id="reserv" type="submit" class="btn big-btn color-bg flat-btn">Commencer la réservation</button>
+										{# </form> #}
+									</div>
+								</div>
+								<!--box-widget-item -->
+								<div class="box-widget-item fl-wrap">
+									<div class="box-widget-item-header">
+										<h3>Localisation :
+										</h3>
+									</div>
+									<div class="box-widget">
+									 {% if ad.Gglmaps is null %}
+										<div class="map-container">
+											<iframe src="{{ad.Gglmaps}}" width="350" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+										</div>
+									{% endif %}	
+										<div class="box-widget-content">
+											<div class="list-author-widget-contacts list-item-widget-contacts">
+												<ul>
+													<li>
+														<span>
+															<i class="fa fa-map-marker"></i>
+															Adresse :</span>
+														<a href="#">{{ad.adresse}}</a>
+													</li>
+													<li>
+														<span>
+															<i class="fa fa-phone"></i>
+															Télephone :</span>
+														<a href="#">{{ad.telephone}}</a>
+													</li>
+												</ul>
+											</div>
+											<div class="list-widget-social">
+												<ul>
+													<li><a href="{{ad.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+													<li><a href="{{ad.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--box-widget-item end -->
+								<!--box-widget-item -->
+								<div class="box-widget-item fl-wrap">
+									<div class="box-widget-item-header">
+										<h3>Instagram :
+										</h3>
+									</div>
+									<div class="box-widget">
+										<div class="box-widget-content">
+											<div class='jr-insta-thumb' id="insta-content" data-instatoken="{{ad.instatoken}}"></div>
+											<a class="widget-posts-link" href="{{ad.instagram}}" target="_blank">Follow Us<span>
+													<i class="fa fa-angle-right"></i>
+												</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								<!--box-widget-item end -->
+							 <!--box-widget-item -->
+
+								<!--box-widget-item end -->
+								<!--box-widget-item -->
+
+								<!--box-widget-item end -->
+							</div>
+						</div> 
+						<!--box-widget-wrap end -->
+					</div>
+				</div>
+			</section>
+			<!--  section  end-->
+			<div class="limit-box fl-wrap"></div>
+			<!--  section   -->
+			
+			<!--  section  end-->
+		</div>
+		<!--  content  end-->
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> #}
+	
+	<script>
+$().ready(function () { // alert("all is okay");
+$("#btnSearch").click();
+});
+</script>
+
+	<script>
+	
+		$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+    $('#date-input').attr('min', maxDate);
+});
+
+
+
+window.onclick = function(){
+	var hidereserv = document.getElementById("reserv");
+	document.onclick = function(reserv)
+	{
+		if(reserv.target.id !== 'myInput')
+		{
+			hidereserv.style.display= 'none';
+		}
+	};
+};
+function showReserv(){
+	document.getElementById("reserv").style.display="inline";
+}		
+
+
+function checkTime() {
+
+var date = $("#date-input").val();
+var id = $("#adId").val();
+
+
+// vider La liste des reservations
+$('#data-ajax2').html("");
+
+$.ajax({
+url: "#"
+
+data: {
+date: date
+},
+success: function (data) { // var myArray = JSON.parse(data);
+	if (data == "") {
+document.getElementById("feedback").innerHTML = "Accune reservation disponnible";
+console.log("Auccune reservation disponnible");
+} else {
+data.forEach(element => display(element['date']['time'], element['disponible']));
+document.getElementById("feedback").innerHTML = "";
+}
+}
+});
+}
+
+function display(text, etat) { // alert(text);
+$('#data-ajax2').append('<input  type="button" onclick="showReserv()"  value="' + text + '" id="myInput" class="btn btn-primary" ' + etat + '/>');
+
+
+$('input:button').click(function () { // alert($(this).val());
+document.getElementById("demo").value = $(this).val();
+});
+}
+
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+var dateControl = document.querySelector('input[type="date"]');
+dateControl.value = today;
+</script>
+
+
+{% endblock %}
+
+{# {% block javascripts %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+
+$().ready(function () {  //alert("all is okay");
+//$("#date-input").change();
+$("#btnSearch").click();
+});
+</script>
+
+	<script>
+		function checkTime(){
+
+var date = $("#date-input").val();
+var id = $("#adId").val();
+var online = $("#online").val();
+
+
+// vider La liste des reservations
+$('#data-ajax2').html("");
+
+$.ajax({
+url: "{{ path('show_times_ajax') }}?id=" + id,
+
+data: {
+date: date
+},
+success: function (data) { 
+	 //var myArray = JSON.parse(data);
+	 //dd(myArray);
+
+if (data == "") {
+document.getElementById("feedback").innerHTML = "Accune reservation disponnible";
+console.log("Accune reservation disponnible");
+} else {
+data.forEach(element => display(element['date']['time'], element['disponible'],element['online'],element['prix']));
+document.getElementById("feedback").innerHTML = "";
+}
+
+}
+});
+};
+
+function display(text, etat, online, prix) { // alert(text);
+if(online == true){
+$('#data-online').append('<div><input  type="button"  value="' + text + '" id="myInput" class="btn btn-primary" ' + etat + '/></div>');
+}else{
+$('#data-ajax2').append('<div><input  type="button"  value="' + text + '" id="myInput" class="btn btn-primary" ' + etat + '/></div>');
+}
+
+
+
+//document.getElementById("prix").value = prix;
+
+$('input:button').click(function () { // alert($(this).val());
+document.getElementById("demo").value = $(this).val();
+});
+}
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+var dateControl = document.querySelector('input[type="date"]');
+dateControl.value = today;
+	</script>
+	
+	<script>
+            $(function () {
+                $("#chk").click(function () {
+                    if ($(this).is(":checked")) {
+						document.getElementById("data-ajax2").className = "hide";
+						document.getElementById("data-online").className = "";
+						let inputs = document.getElementById('chkcab');
+                        inputs.checked = false;
+                    }
+                });
+            });
+
+			$(function () {
+                $("#chkcab").click(function () {
+                    if ($(this).is(":checked")) {
+						document.getElementById("data-ajax2").className = "";
+						document.getElementById("data-online").className = "hide";
+						let inputs = document.getElementById('chk');
+                        inputs.checked = false;
+                    }
+                });
+            });
+			
+        </script>
+		
+{% endblock %} #}

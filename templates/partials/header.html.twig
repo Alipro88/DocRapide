@@ -1,0 +1,91 @@
+<!-- header-->
+<header class="main-header dark-header fs-header sticky" style="background: #43b7e6; !important; box-shadow: none; !important;">
+    <div class="header-inner">
+        <div class="logo-holder">
+            <a href="{{path('home')}}"><img src="/images/docrapide.png" alt="docrapide"></a>
+        </div>
+        {% if app.user == null %}
+        <div class="nav-holder main-menu">
+                <nav>
+                            <ul>
+                                <li>
+                                    <a href="#" >Se connecter</a>
+                                </li>
+                                <li>
+                                    <a href="#" >Vous êtes praticien ?</a>
+                                </li>
+                                
+                            </ul>
+                </nav>
+        </div>
+        {#    <div class="nav-holder main-menu">#}
+        {#        <nav>#}
+        {#            <ul>#}
+        {#                <li>#}
+        {#                    <a  href="{{path('account_registerpro')}}" class="" style="top: 0px">#}
+        {#                        Professionnel de santé ?#}
+        {#                        <span><i class="fa fa-caret-down"></i></span>#}
+        {#                    </a>#}
+        {#                    <ul>#}
+        {#                        <li>#}
+        {#                            <a href="{{path('account_login')}}" class="">Se connecter</a>#}
+        {#                        </li>#}
+        {#                    </ul>#}
+        {#                </li>#}
+        {#            </ul>#}
+        {#        </nav>#}
+        {#    </div>#}
+        {% endif %}
+        {% if app.user %}
+            <div class="header-user-menu">
+                <div class="header-user-name">
+                    {% if app.user.filename is not null %}
+                    <span><img src="/images/properties/{{app.user.filename}}" alt=""></span>
+                {% endif %}
+                {% if app.user.filename is null %}
+                    {% if app.user.genre == 1 %}
+                        <span><img src="/images/Homme.jpeg" alt=""></span>
+                    {% endif %}
+                    {% if app.user.genre == 2 %}
+                        <span><img src="/images/Femme.jpeg" alt=""></span>
+                    {% endif %}        
+                {% endif %}   
+                    {{ app.user.firstname }} {{ app.user.lastname }}
+                </div>
+                <ul>
+                    <li>
+                        <div class="header-user">
+                            <a href="{{ path('user_ad', {'slug':app.user.slug }) }}"> Mon profile</a>
+                        </div>
+                    </li>
+                    {% if not is_granted('ROLE_PATIENT')%}
+                    <li>
+                        <div class="header-user">
+                           <a href="{{ path('list_reservations') }}"> Dashboard</a>
+                        </div>
+                    </li>
+                    {% endif %}
+					
+                    <li>
+                        <div class="header-user">
+                            <a href="{{path('account_logout')}}">Se déconnecter</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        
+            
+        {% endif %}
+        <!-- nav-button-wrap-->
+        <div class="nav-button-wrap color-bg" style="margin-right: 12px !important;">
+            <div class="nav-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- nav-button-wrap end-->
+        <!--  navigation -->
+        <!-- navigation  end -->
+    </div>
+</header>

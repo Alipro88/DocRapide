@@ -1,0 +1,249 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre profile {{titre}}{% endblock %}
+{% form_theme form _self %}
+{% block stylesheets %}
+<style>
+    .main-footer {
+            display: none;
+    }
+</style> 
+{% endblock %}
+{% block body %}
+
+{% include 'dashboard/_header.html.twig' %}
+                                                 
+                                                
+                                                    <div class="custom-form">
+                                                        {{ form_start(form) }}
+                                                        <label><i class="fa fa-user-o"></i>
+                                                        {{  form_row(form.name) }}
+                                                        </label>
+                                                        <label><i class="fa fa-briefcase"></i>
+                                                        {{  form_row(form.description) }}
+                                                        </label>
+                                                        <label><i class="fa fa-address-card-o"></i>
+                                                        {{  form_row(form.adresse) }}
+                                                        </label>
+                                                        <label><i class="fa fa-phone"></i>
+                                                        {{  form_row(form.telephone) }}
+                                                        </label>
+                                                        <label><i class="fa fa-envelope-o"></i>
+                                                        {{  form_row(form.email) }}
+                                                        </label>
+                                                        <label><i class="fa fa-money"></i>
+                                                        {{  form_row(form.paiement) }}
+                                                        </label>
+                                                        <label><i class="fa fa-language"></i>
+                                                            {{  form_row(form.langue) }}
+                                                        </label>
+                                                        {# <label><i class="fa fa-code"></i>
+                                                            {{  form_row(form.Gglmaps) }}
+                                                        </label> #}
+                                                        {# <label><i class="fa fa-briefcase"></i>
+                                                        {{  form_row(form.slug) }}
+                                                        </label> #}
+                                                        {{  form_row(form.genre) }}
+                                                <div class="row">
+                                                <div class="change-photo-btn">
+                                                        <div class="photoUpload">
+                                                          <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                          {{  form_row(form.imageFile) }}
+                                                        </div>
+                                                </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                    {{  form_row(form.category) }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{  form_row(form.ville) }}
+                                                    </div>
+                                                </div>
+                                                {# <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Latitude:<i class="fa fa-map-marker"></i></label>
+                                                        {{  form_row(form.lat) }}                                                   
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Longitude:<i class="fa fa-map-marker"></i></label>
+                                                        {{  form_row(form.longi) }}                                                  
+                                                    </div>
+                                                </div>
+                                                <div class="map-container">
+                                                        
+                                                    <div id="singleMap" data-latitude="{{ ad.lat }}" data-longitude="{{ ad.longi }}"></div>
+                                                    
+                                                </div>#}
+                                                <div class="profile-edit-container">
+                                                        <div class="profile-edit-header fl-wrap" style="margin-top:30px">
+                                                            <h4>Socials</h4>
+                                                        </div>
+                                                        <div class="custom-form">
+                                                            <label><i class="fa fa-facebook"></i>
+                                                            {{  form_row(form.facebook) }}</label>
+                                                            <label><i class="fa fa-twitter"></i> 
+                                                            {{  form_row(form.twitter) }} </label>
+                                                            {# <label><i class="fa fa-whatsapp"></i>  
+                                                            {{  form_row(form.whatsapp) }}</label> #}
+                                                            <label><i class="fa fa-instagram"></i>  
+                                                            {{  form_row(form.instagram) }}</label>
+                                                            {# <label><i class="fa fa-vk"></i>  
+                                                            {{  form_row(form.instatoken) }}</label> #}
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-6 hidden">
+                                                                    {{  form_row(form.author) }}
+                                                </div>
+                                                                <div class="row">
+                                                                        {{ form_widget(form) }}
+                                                </div>
+                                                <button type="submit" class="btn  big-btn  color-bg flat-btn">Enregistrer<i class="fa fa-angle-right"></i></button>
+
+                                                {{ form_end(form) }} 
+                                                
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->	
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                   
+                    <!-- section end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+{% endblock %}
+
+{% block _ad_expertises_widget %}
+
+    {{ form_widget(form) }}
+ 
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-expertise" class="btn btn-primary">Ajouter une expertise </button>
+    </div>
+
+{% endblock %}
+
+
+{% block _ad_expertises_entry_row %}
+
+    {{ form_widget(form) }}
+
+{% endblock %}
+
+
+{% block _ad_expertises_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="row">
+                            <div class="col">
+                                <label><i class="fa fa-map-marker cr"></i>
+                                {{ form_widget(form.name) }}</label>
+                            </div>
+                    </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block _ad_diplomes_widget %}
+
+    {{ form_widget(form) }}
+ 
+    <input type="hidden" id="widgets-counterr" value="0">
+    <div class="form-group">
+        <button type="button" id="add-diplome" class="btn btn-primary">Ajouter une diplome </button>
+    </div>
+
+{% endblock %}
+
+
+{% block _ad_diplomes_entry_row %}
+
+    {{ form_widget(form) }}
+
+{% endblock %}
+
+
+{% block _ad_diplomes_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="row">
+                            <div class="col">
+                                <label><i class="fa fa-map-marker cr"></i>
+                                {{ form_widget(form.description) }}</label>
+                            </div>
+                    </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger cr" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="../js/maps.js"></script>
+    {% include "front/mapsjsnew.html.twig" %}
+    <script>
+        
+        $('#add-expertise').click(function(){
+            const index = +$('#widgets-counter').val();
+            console.log(index);
+            const tmpl = $('#ad_expertises').data('prototype').replace(/__name__/g, index);
+            
+            $('#ad_expertises').append(tmpl);
+            $('#widgets-counter').val(index + 1);
+            handleDeleteButtons();
+        });
+    
+        function handleDeleteButtons(){
+            $('button[data-action="delete"]').click(function(){
+                const target = this.dataset.target;
+                $(target).remove();
+            });
+        }
+
+            $('#add-diplome').click(function(){
+            const index = +$('#widgets-counterr').val();
+            const tmpl = $('#ad_diplomes').data('prototype').replace(/__name__/g, index);
+            $('#ad_diplomes').append(tmpl);
+            $('#widgets-counterr').val(index + 1);
+            handleDeleteButtons();
+        });
+
+        function updateCounterEx(){
+            const count = +$('#ad_expertises div.form-group').length;
+            $('#widgets-counter').val(count);
+        }
+
+        function updateCounterDip(){
+            const count = +$('#ad_diplomes div.form-group').length;
+            $('#widgets-counterr').val(count);
+        }
+
+        updateCounterEx();
+        updateCounterDip();
+        handleDeleteButtons();
+    
+    </script>
+ 
+{% endblock  %}

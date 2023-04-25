@@ -1,0 +1,54 @@
+
+                <!-- wrapper -->	
+                <div id="wrapper">
+                    <!--content -->  
+                    <div class="content">
+                        <!--section --> 
+                        <section id="sec1">
+                            <!-- container -->
+                            <div class="container">
+                                <!-- profile-edit-wrap -->
+                                <div class="profile-edit-wrap">
+                                    <div class="profile-edit-page-header">
+                                        <h2>Tableau de bord</h2>
+                                        <div class="breadcrumbs"><a href="{{path('user_ad', {'slug':app.user.slug })}}">Tableau de bord</a><span>{{titre}}</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="fixed-bar fl-wrap">
+                                                <div class="user-profile-menu-wrap fl-wrap">
+                                                       <!-- user-profile-menu-->
+                                                       <div class="user-profile-menu">
+                                                        {# <h3>Main</h3> #}
+                                                        <ul>
+                                                             {% if is_granted('ROLE_PATIENT') %}
+                                                            <li><a href="{{path('user_ad', {'slug':app.user.slug })}}"><i class="fa fa-gears"></i>Mes réservation</a></li>
+                                                              {% endif %}
+                                                            {% if not is_granted('ROLE_PATIENT') %}
+                                                            {% if is_granted('ROLE_ADMIN') %}
+                                                            <li><a href="{{path('user_ad', {'slug':app.user.slug })}}"><i class="fa fa-gears"></i>Liste ads</a></li>
+                                                            {% endif %}
+                                                            {% endif %}
+                                                            {% if not is_granted('ROLE_PATIENT') and not is_granted('ROLE_ADMIN') %}
+                                                            <li><a href="{{path('edit_ad', {'slug':ad.slug })}}"><i class="fa fa-gears"></i>Modifier mon profile</a></li>
+                                                            {% endif %}
+                                                            {% if is_granted('ROLE_PATIENT') %}
+                                                            <li><a href="{{path('edit_patient', {'slug':app.user.slug })}}"><i class="fa fa-gears"></i>Modifier mon profile</a></li>
+                                                            {% endif %}                                            
+                                                            <li><a href="{{path('edit_patient_password', {'slug':app.user.slug })}}"><i class="fa fa-gears"></i>Modifier mon mot de passe</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- user-profile-menu end-->
+                                                    <!-- user-profile-menu-->
+                                                    
+                                                    <!-- user-profile-menu end-->                                        
+                                                    <a href="{{path('account_logout')}}">Se déconnecter</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <!-- profile-edit-container--> 
+                                            <div class="profile-edit-container add-list-container">
+                                                <div class="profile-edit-header fl-wrap">
+                                                    <h4></h4>
+                                                </div>

@@ -1,0 +1,50 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+        <div class="page-wrapper">
+            <div class="page-titles">
+                <div class="d-flex align-items-center">
+                    <h5 class="font-medium m-b-0">Docalendar</h5>
+                    
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Container fluid scss in scafholding.scss -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col l12 s12">
+                        <div class="card">
+                            <div class="card-content">
+					{{ include('calendar/_form.html.twig') }}
+				</div></div></div></div></div></div>
+	{# <a href="{{ path('calendar_index') }}">back to list</a> #}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+	
+    $(function(){
+var dtToday = new Date();
+
+var month = dtToday.getMonth() + 1;
+var day = dtToday.getDate();
+var day1 = dtToday.getDate() + 1;
+var year = dtToday.getFullYear();
+if(month < 10)
+    month = '0' + month.toString();
+if(day < 10)
+    day = '0' + day.toString();
+if(day1 < 10)
+    day1 = '0' + day1.toString();
+
+var maxDate = year + '-' + month + '-' + day;
+var maxDate1 = year + '-' + month + '-' + day1;
+$('#calend_datestart').attr('min', maxDate);
+$('#calend_dateend').attr('min', maxDate1);
+});
+</script>
+
+{% endblock %}

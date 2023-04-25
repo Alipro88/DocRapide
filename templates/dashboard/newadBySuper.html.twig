@@ -1,0 +1,262 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver votre médecin dans les meilleurs médecins au Maroc - docrapide.ma
+              {% endblock %}{% form_theme form _self %}
+{% block body %}
+
+	
+                <!-- wrapper -->	
+                <div id="wrapper">
+                    <!--content -->  
+                    <div class="content">
+                        <!--section --> 
+                        <section id="sec1">
+                            <!-- container -->
+                            <div class="container">
+                                <!-- profile-edit-wrap -->
+                                <div class="profile-edit-wrap">
+                                    <div class="profile-edit-page-header">
+                                        <h2>Ajouter une Pub</h2>
+                                        <div class="breadcrumbs"><a href="#">Home</a><a href="#">Dasboard</a><span>Add Listing</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="fixed-bar fl-wrap">
+                                                <div class="user-profile-menu-wrap fl-wrap">
+                                                    <!-- user-profile-menu-->
+                                                    <div class="user-profile-menu">
+                                                        <h3>Main</h3>
+                                                        <ul> 
+                                                            <li><a href="{{path('admin_ad_index')}}"><i class="fa fa-gears"></i>Dashboard</a></li>
+                                                        </ul>
+                                                    </div>
+                                                   
+                                                    <!-- user-profile-menu end-->                                        
+                                                    <a href="#" class="{{path('account_logout')}}">Se déconnecter</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <!-- profile-edit-container--> 
+                                            <div class="profile-edit-container add-list-container">
+                                                <div class="profile-edit-header fl-wrap">
+                                                    <h4>Basic Informations {{email}}</h4>
+                                                </div> 
+                                                
+                                                <div class="custom-form">
+                                                        {{ form_start(form) }}
+                                                    <label><i class="fa fa-briefcase"></i>
+                                                    {{  form_row(form.name) }}
+                                                </label>
+                                                {{  form_row(form.description) }}
+                                                {# {{  form_row(form.slug) }} #}
+                                                {{  form_row(form.adresse) }}
+                                                {{  form_widget(form.email, {'value': email }) }}
+                                                {{  form_row(form.telephone) }}
+                                                {{  form_row(form.paiement) }}
+                                                <div class="row">
+                                                        <div class="change-photo-btn">
+                                                                <div class="photoUpload">
+                                                                  <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                  {{  form_row(form.imageFile) }}
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                    {{  form_row(form.category) }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{  form_row(form.ville) }}
+                                                    </div>
+                                                </div>
+                                                {# <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label>Latitude:<i class="fa fa-map-marker"></i></label>
+                                                            {{  form_row(form.lat) }}                                                   
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label>Longitude:<i class="fa fa-map-marker"></i></label>
+                                                            {{  form_row(form.longi) }}                                                  
+                                                        </div>
+                                                    </div> #}
+                                                      
+                                                            <div class="profile-edit-container">
+                                                                    <div class="profile-edit-header fl-wrap" style="margin-top:30px">
+                                                                        <h4>Socials</h4>
+                                                                    </div>
+                                                                    <div class="custom-form">
+                                                                        <label><i class="fa fa-facebook"></i>
+                                                                        {{  form_row(form.facebook) }}</label>
+                                                                        <label><i class="fa fa-twitter"></i> 
+                                                                        {{  form_row(form.twitter) }} </label>
+                                                                        {# <label><i class="fa fa-whatsapp"></i>  
+                                                                        {{  form_row(form.whatsapp) }}</label> #}
+                                                                        <label><i class="fa fa-instagram"></i>  
+                                                                        {{  form_row(form.instagram) }}</label>
+                                                                        {# <label><i class="fa fa-vk"></i>  
+                                                                        {{  form_row(form.instatoken) }}</label> #}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    {{  form_row(form.author) }}
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    {{  form_row(form.genre) }}
+                                                                </div>
+                                                                <div class="row">
+                                                                        {{ form_widget(form) }}
+                                                                </div>
+                                                               
+                                                <button type="submit" class="btn  big-btn  color-bg flat-btn">Save Changes<i class="fa fa-angle-right"></i></button>
+
+                                                {{ form_end(form) }} 
+                                                   
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->	
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                   
+                    <!-- section end -->
+                </div>
+            </div>
+
+{% endblock %}
+
+
+
+
+
+{% block _ad_expertises_entry %}
+  {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_expertises_widget %}
+
+{{ form_widget(form) }}
+ 
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-expertise" class="btn btn-primary">Ajouter </button>
+    </div>
+
+{% endblock %}
+
+
+{% block _ad_expertises_entry_row %}
+
+{{ form_widget(form) }}
+
+{% endblock %}
+
+
+{% block _ad_expertises_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="row">
+                            <div class="col">
+                                <label><i class="fa fa-map-marker cr"></i>
+                                {{ form_widget(form.name) }}</label>
+                            </div>
+                        </div>
+                    </div>
+            
+            <div class="col-2">
+                <button type="button" class="btn btn-danger cr" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block _ad_diplomes_entry %}
+  {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_diplomes_widget %}
+
+{{ form_widget(form) }}
+ 
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-diplome" class="btn btn-primary">Ajouter </button>
+    </div>
+
+{% endblock %}
+
+
+{% block _ad_diplomes_entry_row %}
+
+{{ form_widget(form) }}
+
+{% endblock %}
+
+
+{% block _ad_diplomes_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="row">
+                            <div class="col">
+                                <label><i class="fa fa-map-marker cr"></i>
+                                {{ form_widget(form.description) }}</label>
+                            </div>
+                        </div>
+                    </div>
+            
+            <div class="col-2">
+                <button type="button" class="btn btn-danger cr" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+        
+    $('#add-expertise').click(function(){
+        const index = +$('#widgets-counter').val();
+        const tmpl = $('#ad_expertises').data('prototype').replace(/__name__/g, index);
+        $('#ad_expertises').append(tmpl);
+        $('#widgets-counter').val(index + 1);
+        handleDeleteButtons();
+    });
+
+    function handleDeleteButtons(){
+        $('button[data-action="delete"]').click(function(){
+            const target = this.dataset.target;
+            $(target).remove();
+        })
+    }
+
+    $('#add-diplome').click(function(){
+        const index = +$('#widgets-counter').val();
+        const tmpl = $('#ad_diplomes').data('prototype').replace(/__name__/g, index);
+        $('#ad_diplomes').append(tmpl);
+        $('#widgets-counter').val(index + 1);
+        handleDeleteButtons();
+    });
+
+    function handleDeleteButtons(){
+        $('button[data-action="delete"]').click(function(){
+            const target = this.dataset.target;
+            $(target).remove();
+        })
+    }
+
+</script>
+{% endblock  %}

@@ -1,0 +1,95 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration
+{% endblock %}
+
+{% block body %}
+	<div class="page-wrapper">
+		<div class="page-titles">
+			<div class="d-flex align-items-center">
+				<h5 class="font-medium m-b-0">Modifier Medecin</h5>
+				<div class="custom-breadcrumb ml-auto">
+					<a href="#!" class="breadcrumb">Home</a>
+					<a href="#!" class="breadcrumb">Modifier Medecin</a>
+				</div>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- Container fluid scss in scafholding.scss -->
+		<!-- ============================================================== -->
+			<div class="container-fluid"> <div class="col l12 s12">
+				<div class="card">
+					<div class="card-content">
+						<div class="d-flex no-block align-items-center">
+							<div class="row">
+
+								{{ form_start(form) }}
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.firstname) }}
+									</div>
+								</div>
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.lastname) }}
+									</div>
+								</div>
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{ form_row(form.telephone) }}
+									</div>
+								</div>
+								<!-- pwd -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.hash) }}
+									</div>
+								</div>
+								<!-- pwd -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.passwordConfirm) }}
+									</div>
+								</div>
+
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.email) }}
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										{{  form_row(form.introduction) }}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s12">
+										{{  form_row(form.category) }}
+									</div>
+								</div>
+
+								<div class="row m-t-20">
+									<div class="col s12">
+										{{  form_row(form.imageFile) }}
+									</div>
+								</div>
+
+								<!-- pwd -->
+								<div class="row m-t-40">
+									<div class="col s12">
+										<button class="btn-large w100 red" type="submit">Sign Up</button>
+									</div>
+								</div>
+								{{ form_end(form) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
