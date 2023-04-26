@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+//sessionInterface
+
 
 class HomeController extends AbstractController
 {
@@ -23,12 +25,18 @@ class HomeController extends AbstractController
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $ads = $repo->findSearch($data);
-
+        $dataAds = array();
+        foreach ($ads as $key => $ad) {
+            $dataAds[$key]['lat'] = $ad->getLat();
+            $dataAds[$key]['longi'] = $ad->getLongi();
+        }
+        
 
         if($form->isSubmitted()){
-            
+            // dd($ads);
             return $this->render('ad.html.twig', [
-                'ads' => $ads
+                'ads' => $ads,
+                'json' => json_encode($dataAds),
             ]);
             }
         return $this->render('home.html.twig', [
@@ -80,18 +88,34 @@ class HomeController extends AbstractController
         return new JsonResponse($dataAds);
     }
 
-    /**
-     * @Route("/tester" , name = "test" , methods={"GET"} )
-     */
-    public function test (RoleRepository $repo) {
-
-        $data = $repo->findAll();
-        
-
-        return new JsonResponse($data);
-
-
+   /**
+   * @Route("/searchResult", name="searchResult", methods={"GET"})
+   */
+   public function searchResult(AdRepository $repo, Request $request): Response
+   {
+    $data = new SearchData();
+    $form = $this->createForm(SearchType::class, $data);
+    $form->handleRequest($request);
+    $ads = $repo->findSearch($data);
+    dd($ads);
+    $dataAds = array();
+    if ($ads !== null) {
+        foreach ($ads as $key => $ad) {
+            $dataAds[$key]['lat'] = $ad->getLat();
+            $dataAds[$key]['longi'] = $ad->getLongi();
+        }
     }
+    $response = new Response();
+    $response->setContent(json_encode($dataAds));
+    $response->headers->set('Content-Type', 'application/json');
+    if ($form->isSubmitted()) {
+        
+        return $response;
+    }
+    return $response;
+
+}
+
 
     /**
      * @Route("/ajax/apiAds" , name = "apiAds" , methods={"GET"} )
@@ -110,4 +134,30 @@ class HomeController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+    /**
+     * @Route("/api_search_result", name="api_search_result", methods={"GET"})
+     */
+    public function searchResultApi(AdRepository $repo, Request $request): Response
+    {
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $ads = $repo->findSearch($data);
+        $dataAds = array();
+        foreach ($ads as $key => $ad) {
+            $dataAds[$key]['lat'] = $ad->getLat();
+            $dataAds[$key]['longi'] = $ad->getLongi();
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($dataAds));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+   
+    
+
 }
+

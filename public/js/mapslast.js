@@ -1,13 +1,17 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+
+var map = L.map('map', {
+    zoomSnap: 12  }
+).setView([51.505, -0.09], 13);
+
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 maxZoom: 19,
 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var marker = L.marker([0, 0]).addTo(map);
-marker.setLatLng([33.7013667,-7.3874631]);
-map.panTo([33.7013667,-7.3874631]);
+// var marker = L.marker([0, 0]).addTo(map);
+// marker.setLatLng([33.7013667,-7.3874631]);
+// map.panTo([33.7013667,-7.3874631]);
 
 
 /******************************************** test */
@@ -59,9 +63,9 @@ map.panTo([33.7013667,-7.3874631]);
 
 
 /******************************************** test */
-
 var latitude = []; // An empty array
 var longitude = []; // An empty array
+
 
 $.ajax({
         url: '/ajax/apiAds',
@@ -73,9 +77,14 @@ $.ajax({
                 latitude.push(data[i].lat);
                 longitude.push(data[i].longi);
                 }
+                console.log(data);
                 // Use the latitude and longitude arrays in your code here
-                console.log("Latitude:", latitude, "Longitude:", longitude);
-                
+                for (var i = 0; i < latitude.length; i++) {
+                    console.log("latitude " +latitude[i] , "latitude" +longitude[i]);
+                    var marker = L.marker([0, 0]).addTo(map);
+                        marker.setLatLng([latitude[i],longitude[i]]);
+                        map.panTo([latitude[i],longitude[i]]);
+                  }
                 },
             error: function (xhr, textStatus, errorThrown) {
                 alert('Ajax request failed.');
@@ -85,12 +94,16 @@ $.ajax({
 
 
 
-for (var i = 0; i < latitude.length; i++) {
-    console.log(latitude[i]);
-    var marker_1 = L.marker([parseFloat(Latitude[i]), parseFloat(Longitude[i])]).addTo(map);
-  }
+
+                 
 
 
+
+// for (var i = 0; i < latitude.length; i++) {
+//     console.log(latitude[i]);
+//     var marker_1 = L.marker([parseFloat(Latitude[i]), parseFloat(Longitude[i])]).addTo(map);
+//   }
+ 
   
 
 

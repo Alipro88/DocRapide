@@ -32,12 +32,21 @@ class AdController extends AbstractController
 
       $data = new SearchData();
       $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
+      $form->handleRequest($request);
       $ads = $repo->findSearch($data);
+
+      $dataAds = array();
+        foreach ($ads as $key => $ad) {
+            $dataAds[$key]['lat'] = $ad->getLat();
+            $dataAds[$key]['longi'] = $ad->getLongi();
+        }
+
        
 
         return $this->render('ad.html.twig', [
-            'ads' => $ads,
+            'ads' => $ads, 
+            'json' => json_encode($dataAds),
+            
             
         ]);
     }
@@ -235,6 +244,8 @@ class AdController extends AbstractController
     //     );
     //     return $this->redirectToRoute('admin_ad_index');
     // }
+
+    
 
 }
 
