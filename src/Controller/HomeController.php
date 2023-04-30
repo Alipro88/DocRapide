@@ -21,6 +21,7 @@ class HomeController extends AbstractController
      */
     public function index(AdRepository $repo, Request $request)
     {
+        $session = $request->getSession();
         $data = new SearchData();
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
@@ -29,11 +30,14 @@ class HomeController extends AbstractController
         foreach ($ads as $key => $ad) {
             $dataAds[$key]['lat'] = $ad->getLat();
             $dataAds[$key]['longi'] = $ad->getLongi();
+            $dataAds[$key]['slug'] = $ad->getId();
+            $dataAds[$key]['adresse'] = $ad->getId();
         }
         
 
         if($form->isSubmitted()){
             // dd($ads);
+            $session->set('datajson', $ads);
             return $this->render('ad.html.twig', [
                 'ads' => $ads,
                 'json' => json_encode($dataAds),
@@ -103,6 +107,10 @@ class HomeController extends AbstractController
         foreach ($ads as $key => $ad) {
             $dataAds[$key]['lat'] = $ad->getLat();
             $dataAds[$key]['longi'] = $ad->getLongi();
+            $dataAds[$key]['slug'] = $ad->getSlug();
+            $dataAds[$key]['adresse'] = $ad->getAdresse();
+            $dataAds[$key]['image'] = $ad->getImage();
+
         }
     }
     $response = new Response();
@@ -147,6 +155,29 @@ class HomeController extends AbstractController
         foreach ($ads as $key => $ad) {
             $dataAds[$key]['lat'] = $ad->getLat();
             $dataAds[$key]['longi'] = $ad->getLongi();
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($dataAds));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+    /**
+     * @Route("/ajax-ads", name="ajax-ads", methods={"GET"})
+     */
+    public function ajaxtest(Request $request): Response {
+
+        $session = $request->getSession();
+        // gets an attribute by name
+        $ads = $session->get('datajson');
+
+        $dataAds = array();
+        foreach ($ads as $key => $ad) {
+            $dataAds[$key]['lat'] = $ad->getLat();
+            $dataAds[$key]['longi'] = $ad->getLongi();
+            $dataAds[$key]['slug'] = $ad->getSlug();
+            $dataAds[$key]['adresse'] = $ad->getAdresse();
         }
 
         $response = new Response();

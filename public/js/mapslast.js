@@ -1,8 +1,6 @@
-
 var map = L.map('map', {
-    zoomSnap: 12  }
+    zoomSnap: 12}
 ).setView([51.505, -0.09], 13);
-
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 maxZoom: 19,
@@ -12,6 +10,8 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 // var marker = L.marker([0, 0]).addTo(map);
 // marker.setLatLng([33.7013667,-7.3874631]);
 // map.panTo([33.7013667,-7.3874631]);
+
+// marker.bindPopup("<b>Location</b><br>Dr BENAMOUR ZAHRA");
 
 
 /******************************************** test */
@@ -65,10 +65,12 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 /******************************************** test */
 var latitude = []; // An empty array
 var longitude = []; // An empty array
+var Slug = [];
+var Adresse = [];
 
 
 $.ajax({
-        url: '/ajax/apiAds',
+        url: '/ajax-ads',
         type: 'GET',
         dataType: 'json',
         async: true,
@@ -76,6 +78,8 @@ $.ajax({
                 for(i = 0; i < data.length; i++) {
                 latitude.push(data[i].lat);
                 longitude.push(data[i].longi);
+                Slug.push(data[i].slug);
+                Adresse.push(data[i].adresse);
                 }
                 console.log(data);
                 // Use the latitude and longitude arrays in your code here
@@ -95,6 +99,7 @@ $.ajax({
 
 
 
+
                  
 
 
@@ -103,6 +108,48 @@ $.ajax({
 //     console.log(latitude[i]);
 //     var marker_1 = L.marker([parseFloat(Latitude[i]), parseFloat(Longitude[i])]).addTo(map);
 //   }
+
+
+// function onMapClick(e) {
+
+//     if (e.latlng.lat.toFixed(2) === 33.59 && e.latlng.lng.toFixed(2) === -7.61){
+//     alert("You clicked the map at " + e.latlng);
+//     }  
+// }
+
+// map.on('click', onMapClick);
+
+var popup = L.popup();
+
+function onMapClick(e) {
+
+    console.log("pop" , e.latlng.lat.toFixed(6) , e.latlng.lng.toFixed(6));
+
+    
+    // if ( e.latlng.lat.toFixed(2) === 33.59 && e.latlng.lng.toFixed(2) ===  -7.61   )
+    // {
+    popup
+        .setLatLng(e.latlng)
+        .setContent( Slug[0] + '<img src="../images/avatar/avatar-bg.png" width="100" height="100" >'+Adresse[0])
+        .openOn(map)
+    
+    // } 
+
+    
+}
+
+map.on('click', onMapClick);
+
+
+// var marker = L.marker([0, 0]).addTo(map);
+// marker.setLatLng([33.7013667,-7.3874631]);
+// map.panTo([33.7013667,-7.3874631]);
+
+// marker.bindPopup(Slug[0]).openPopup();
+
+
+
+
  
   
 
