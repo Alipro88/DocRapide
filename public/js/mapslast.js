@@ -1,10 +1,9 @@
-var map = L.map('map', {
-    zoomSnap: 12}
-).setView([51.505, -0.09], 13);
+
+
+var map = L.map('map').setView([51.505, -0.09], 12);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-maxZoom: 19,
-attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
 // var marker = L.marker([0, 0]).addTo(map);
@@ -87,6 +86,7 @@ $.ajax({
                     console.log("latitude " +latitude[i] , "latitude" +longitude[i]);
                     var marker = L.marker([0, 0]).addTo(map);
                         marker.setLatLng([latitude[i],longitude[i]]);
+                        marker.bindPopup(Slug[i] +'<br>' +'<img src="../images/avatar/avatar-bg.png" width="100" height="100" >'+Adresse[i] + (i + 1));
                         map.panTo([latitude[i],longitude[i]]);
                   }
                 },
@@ -119,26 +119,27 @@ $.ajax({
 
 // map.on('click', onMapClick);
 
-var popup = L.popup();
+// var popup = L.popup();
 
-function onMapClick(e) {
+// function onMapClick(e) {
 
-    console.log("pop" , e.latlng.lat.toFixed(6) , e.latlng.lng.toFixed(6));
-
-    
-    // if ( e.latlng.lat.toFixed(2) === 33.59 && e.latlng.lng.toFixed(2) ===  -7.61   )
-    // {
-    popup
-        .setLatLng(e.latlng)
-        .setContent( Slug[0] + '<img src="../images/avatar/avatar-bg.png" width="100" height="100" >'+Adresse[0])
-        .openOn(map)
-    
-    // } 
+//     console.log("pop" , e.latlng.lat.toFixed(6) , e.latlng.lng.toFixed(6));
 
     
-}
+//     // if ( e.latlng.lat.toFixed(2) === 33.53 && e.latlng.lng.toFixed(2) ===  -7.62  )
+//     // {
+//     for ( var i = 0; i < latitude.length; i++)  {  
+//     popup
+//         .setLatLng(e.latlng)
+//         .setContent( Slug[i] + '<img src="../images/avatar/avatar-bg.png" width="100" height="100" >'+Adresse[i])
+//         .openOn(map)
+    
+//     } 
 
-map.on('click', onMapClick);
+    
+// }
+
+// map.on('click', onMapClick);
 
 
 // var marker = L.marker([0, 0]).addTo(map);
